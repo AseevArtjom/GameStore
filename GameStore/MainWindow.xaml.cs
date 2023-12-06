@@ -20,6 +20,7 @@ namespace GameStore
     public partial class MainWindow : Window
     {
         private AppList appList = new AppList();
+        private AppList HomeAppList = new AppList();
 
         public MainWindow()
         {
@@ -34,6 +35,29 @@ namespace GameStore
             appList.AddApp(new Entities.App("https://cdn.icon-icons.com/icons2/1211/PNG/512/1491580658-yumminkysocialmedia06_83104.png", "Instagram",3.4f, "Социальные сети", "Бесплатно"));
 
             LVMain.ItemsSource = appList.Apps;
+
+
+
+
+            HomeAppList.AddApp(new Entities.App("", "Microsoft 365", 0,"","189.99$"));
+            HomeAppList.AddApp(new Entities.App("", "Clip Studio Paint", 0, "", "59.99$"));
+            HomeAppList.AddApp(new Entities.App("", "Microsoft 365", 0,"","189.99$"));
+            HomeAppList.AddApp(new Entities.App("", "Microsoft 365", 0,"","189.99$"));
+            HomeMainLV.ItemsSource = appList.Apps;
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Label1.Visibility = Visibility.Collapsed;
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if(string.IsNullOrWhiteSpace(SearchTextBox.Text))
+            {
+                Label1.Visibility = Visibility.Visible;
+                SearchTextBox.Text = "";
+            }
         }
     }
 }

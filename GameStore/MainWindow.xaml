@@ -7,9 +7,19 @@
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         mc:Ignorable="d"
         fw:AcrylicWindow.Enabled="True"
-        Title="Game Store" Height="650" Width="1100" MinHeight="650" MinWidth="1100" MaxHeight="650" MaxWidth="1100" Icon="/Shop.png" >
+        Title="Game Store" Height="670" Width="1100" MinHeight="670" MinWidth="1100" MaxHeight="670" MaxWidth="1100" Icon="/Shop.png">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Assets/MyStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources> 
+
     <Grid Background="#272727">
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="360"/>
             <RowDefinition Height="280"/>
         </Grid.RowDefinitions>
@@ -18,7 +28,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.RowSpan="2" Background="#202020">
+        <StackPanel Grid.Column="0" Grid.RowSpan="3" Background="#202020">
             <Button Height="40" Width="40" Margin="0,10,0,0" Background="#202020" BorderThickness="0" >
                 <StackPanel>
                     <Image Source="https://i.imgur.com/JepKuZD.png"/>
@@ -27,11 +37,41 @@
             <Label Content="Домашняя страница" FontSize="7" Margin="0,0,0,0" Foreground="White" HorizontalAlignment="Center"/>
         </StackPanel>
 
+        <WrapPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
+            <TextBox x:Name="SearchTextBox" Style="{StaticResource RoundedTextBoxStyle}" Height="30" Width="550" Margin="0,5,0,0" Background="#373737" BorderBrush="#202020"
+                     HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="#ababab" FontSize="14" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+            <Label IsHitTestVisible="False" x:Name="Label1" Height="30" Width="450" Content="Поиск приложений, игр, фильмов, устройств и многого другого" Margin="-640,5,0,0" Foreground="#ababab" FontSize="14" />
+            <Image  Source="https://i.imgur.com/128Y0CB.png" Height="15" Width="15" Margin="-35,5,0,0"/>
 
-        <Label Grid.Column="1" Grid.Row="1" Margin="5,0,0,0" Height="30" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Топ бесплатных приложений" Foreground="White" FontSize="14" FontFamily="Times new Roman"/>
+        </WrapPanel>
 
-        <ListView x:Name="LVMain" Grid.Row="1" Grid.Column="1" Height="200"  Background="#272727" BorderThickness="0" Margin="0,0,0,15" >
-            
+        <WrapPanel Grid.Row="1" Grid.Column="1">
+            <ListView x:Name="HomeMainLV" Height="310" Width="980" Margin="20" Background="#272727" BorderThickness="0">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="1"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel Height="290" Width="300" Orientation="Horizontal">
+                            <Grid>
+                                <TextBox Style="{StaticResource RoundedTextBoxStyle}" Height="100" Width="250" Background="Transparent" Foreground="White" Text="{Binding Name}" HorizontalAlignment="Left" VerticalAlignment="Center" IsReadOnly="True"/>
+                                <Rectangle Fill="{fw:AcrylicBrush grid}" Height="290" Width="300" IsHitTestVisible="False"/>
+                            </Grid>
+                            
+                            
+                        </WrapPanel>
+
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </WrapPanel>
+        
+        <Label Grid.Column="1" Grid.Row="2" Margin="5,0,0,0" Height="30" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Топ бесплатных приложений" Foreground="White" FontSize="14" FontFamily="Times new Roman"/>
+
+        <ListView  x:Name="LVMain" Grid.Row="2" Grid.Column="1" Height="200"  Background="#272727" BorderThickness="0" Margin="0,0,0,30">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Rows="2"/>
@@ -58,10 +98,10 @@
                                 </WrapPanel>
                             </WrapPanel>
                             <WrapPanel>
-                                <Label Content="{Binding Rating}" Margin="2,-14,0,0" Foreground="#ababab"/>
-                                <Image Height="15" Width="15" Source="https://i.imgur.com/eZHFoRx.png" Margin="-2,-15,0,0"/>
-                                <Label Background="#ababab" Width="1" Height="14" Margin="5,-14,0,0"/>
-                                <Label Content="{Binding Type}" Foreground="#ababab" Margin="0,-15,0,0"/>
+                                <Label Content="{Binding Rating}" Margin="0,-10,0,0" Foreground="#ababab"/>
+                                <Image Height="15" Width="15" Source="https://i.imgur.com/eZHFoRx.png" Margin="-2,-10,0,0"/>
+                                <Label Background="#ababab" Width="1" Height="14" Margin="5,-8,0,0"/>
+                                <Label Content="{Binding Type}" Foreground="#ababab" Margin="0,-10,0,0"/>
                             </WrapPanel>
                         </StackPanel>
                     </Grid>
